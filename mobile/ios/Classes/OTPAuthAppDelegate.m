@@ -197,7 +197,7 @@ static NSString *const kOTPKeychainEntriesArray = @"OTPKeychainEntries";
 - (void)navigationController:(UINavigationController *)navigationController
        didShowViewController:(UIViewController *)viewController
                     animated:(BOOL)animated {
-  if (viewController == self.rootViewController) {
+  if ([viewController isMemberOfClass:[RootViewController class]]) {
     self.editButton = viewController.editButtonItem;
     UIToolbar *toolbar = self.navigationController.toolbar;
     NSMutableArray *items = [NSMutableArray arrayWithArray:toolbar.items];
