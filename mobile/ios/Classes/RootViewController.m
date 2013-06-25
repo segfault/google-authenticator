@@ -67,9 +67,11 @@
                forState:UIControlStateNormal];
   UILabel *titleLabel = [titleButton titleLabel];
   titleLabel.font = [UIFont boldSystemFontOfSize:20.0];
-  titleLabel.shadowOffset = CGSizeMake(0.0, -1.0);
-  [titleButton setTitleShadowColor:[UIColor colorWithWhite:0.0 alpha:0.5]
-                          forState:UIControlStateNormal];
+  if ([[[UIDevice currentDevice] systemVersion] compare:@"7.0" options:NSNumericSearch] == NSOrderedAscending) {
+    titleLabel.shadowOffset = CGSizeMake(0.0, -1.0);
+    [titleButton setTitleShadowColor:[UIColor colorWithWhite:0.0 alpha:0.5]
+                            forState:UIControlStateNormal];
+  }
   titleButton.adjustsImageWhenHighlighted = NO;
   [titleButton sizeToFit];
 
