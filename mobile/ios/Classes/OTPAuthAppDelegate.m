@@ -27,6 +27,7 @@
 #import "OTPAuthBarClock.h"
 #import "UIColor+MobileColors.h"
 #import "GTMLocalizedString.h"
+#import <DropboxSDK/DropboxSDK.h>
 
 static NSString *const kOTPKeychainEntriesArray = @"OTPKeychainEntries";
 
@@ -120,6 +121,12 @@ static NSString *const kOTPKeychainEntriesArray = @"OTPKeychainEntries";
 
 - (BOOL)application:(UIApplication *)application
     didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+  DBSession* dbSession = [[[DBSession alloc]
+                            initWithAppKey:@"8wepacxs7pwbjvc"
+                            appSecret:@"ls8797auelpazd5"
+                           root:kDBRootAppFolder] autorelease];
+  [DBSession setSharedSession:dbSession];
+    
   NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
   NSArray *savedKeychainReferences = [ud arrayForKey:kOTPKeychainEntriesArray];
   self.authURLs
