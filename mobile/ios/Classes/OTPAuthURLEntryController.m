@@ -33,7 +33,7 @@
 @property(nonatomic, readwrite, assign) UIBarButtonItem *doneButtonItem;
 @property(nonatomic, readwrite, retain) Decoder *decoder;
 // queue is retained using dispatch_queue retain semantics.
-@property (nonatomic, retain) __attribute__((NSObject)) dispatch_queue_t queue;
+@property (nonatomic, retain) dispatch_queue_t queue;
 @property (nonatomic, retain) AVCaptureSession *avSession;
 @property BOOL handleCapture;
 
@@ -168,19 +168,11 @@
   NSDictionary* info = [aNotification userInfo];
   CGFloat offset = 0;
 
-  // UIKeyboardFrameBeginUserInfoKey does not exist on iOS 3.1.3
-  if (&UIKeyboardFrameBeginUserInfoKey != NULL) {
-    NSValue *sizeValue = [info objectForKey:UIKeyboardFrameBeginUserInfoKey];
-    CGSize keyboardSize = [sizeValue CGRectValue].size;
-    BOOL isLandscape
-      = UIInterfaceOrientationIsLandscape(self.interfaceOrientation);
-    offset = isLandscape ? keyboardSize.width : keyboardSize.height;
-  } else {
-    NSValue *sizeValue = [info objectForKey:UIKeyboardBoundsUserInfoKey];
-    CGSize keyboardSize = [sizeValue CGRectValue].size;
-    // The keyboard size value appears to rotate correctly on iOS 3.1.3.
-    offset = keyboardSize.height;
-  }
+  NSValue *sizeValue = [info objectForKey:UIKeyboardFrameBeginUserInfoKey];
+  CGSize keyboardSize = [sizeValue CGRectValue].size;
+  BOOL isLandscape = UIInterfaceOrientationIsLandscape(self.interfaceOrientation);
+  offset = isLandscape ? keyboardSize.width : keyboardSize.height;
+  
 
   UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, offset, 0.0);
   self.scrollView.contentInset = contentInsets;
@@ -278,7 +270,7 @@
 - (IBAction)cancel:(id)sender {
   self.handleCapture = NO;
   [self.avSession stopRunning];
-  [self dismissModalViewControllerAnimated:NO];
+  [self dismissViewControllerAnimated:NO completion: nil];
 }
 
 - (IBAction)scanBarcode:(id)sender {
@@ -354,7 +346,7 @@
          forControlEvents:UIControlEventTouchUpInside];
   [overlayView addSubview:cancelButton];
 
-  [self presentModalViewController:previewController animated:NO];
+  [self presentViewController:previewController animated:NO completion:nil];
   self.handleCapture = YES;
   [self.avSession startRunning];
 }
@@ -435,7 +427,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     [self.avSession stopRunning];
     if (authURL) {
       [self.delegate authURLEntryController:self didCreateAuthURL:authURL];
-      [self dismissModalViewControllerAnimated:NO];
+      [self dismissViewControllerAnimated:NO completion:nil];
     } else {
       NSString *title = GTMLocalizedString(@"Invalid Barcode",
                                            @"Alert title describing a bad barcode");
