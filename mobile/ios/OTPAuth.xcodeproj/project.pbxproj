@@ -443,8 +443,6 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				7A63F24417792191005971F0 /* QuartzCore.framework */,
-				7A63F24217792161005971F0 /* CoreData.framework */,
 				7A0E0A0117790EE600C2537F /* Default-568h@2x.png */,
 				8B2B8AE1118BA49F00437315 /* README */,
 				8B4553CA1192158300ABD707 /* Entitlements.plist */,
@@ -503,6 +501,8 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7A63F24417792191005971F0 /* QuartzCore.framework */,
+				7A63F24217792161005971F0 /* CoreData.framework */,
 				7A63F24017791FD2005971F0 /* DropboxSDK.framework */,
 				8B80995D13D500E200D4FCC8 /* SenTestingKit.framework */,
 				8B8098E513D4FED600D4FCC8 /* libstdc++.dylib */,
