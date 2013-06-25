@@ -24,13 +24,11 @@
 		1D3623260D0F684500981E51 /* OTPAuthAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* OTPAuthAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		28C286E10D94DF7D0034E888 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* RootViewController.m */; };
-		7A0E0A0217790EE600C2537F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A0E0A0117790EE600C2537F /* Default-568h@2x.png */; };
 		7A63F24117791FD2005971F0 /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A63F24017791FD2005971F0 /* DropboxSDK.framework */; };
 		7A63F24317792161005971F0 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A63F24217792161005971F0 /* CoreData.framework */; };
 		7A63F24517792191005971F0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A63F24417792191005971F0 /* QuartzCore.framework */; };
 		8B0022E011E7BF800092DE18 /* OTPTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B0022DF11E7BF800092DE18 /* OTPTableView.m */; };
 		8B0028B511EB75920092DE18 /* OTPScannerOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B0028B411EB75920092DE18 /* OTPScannerOverlayView.m */; };
-		8B00365311ECD2390092DE18 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B00365211ECD2390092DE18 /* Default.png */; };
 		8B00BE9A13748ABA00B36076 /* LegalNotices.html in Resources */ = {isa = PBXBuildFile; fileRef = 8B00BE9913748ABA00B36076 /* LegalNotices.html */; };
 		8B2B6E501187AC6B00437315 /* OTPGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B2B6E4E1187AC6B00437315 /* OTPGenerator.m */; };
 		8B2B8585118B8ACF00437315 /* Refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B2B8583118B8ACF00437315 /* Refresh.png */; };
@@ -143,7 +141,6 @@
 		28C286DF0D94DF7D0034E888 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		28C286E00D94DF7D0034E888 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		7A0E0A0117790EE600C2537F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		7A63F24017791FD2005971F0 /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DropboxSDK.framework; path = "externals/dropbox-ios-sdk-1.3.4/DropboxSDK.framework"; sourceTree = "<group>"; };
 		7A63F24217792161005971F0 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		7A63F24417792191005971F0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -151,7 +148,6 @@
 		8B0022DF11E7BF800092DE18 /* OTPTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTPTableView.m; sourceTree = "<group>"; };
 		8B0028B311EB75920092DE18 /* OTPScannerOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTPScannerOverlayView.h; sourceTree = "<group>"; };
 		8B0028B411EB75920092DE18 /* OTPScannerOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTPScannerOverlayView.m; sourceTree = "<group>"; };
-		8B00365211ECD2390092DE18 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		8B18D043139801AA00A6654D /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = ar; path = ar.lproj/LegalNotices.html; sourceTree = "<group>"; };
 		8B18D044139801AA00A6654D /* bg */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = bg; path = bg.lproj/LegalNotices.html; sourceTree = "<group>"; };
 		8B18D045139801AA00A6654D /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = ca; path = ca.lproj/LegalNotices.html; sourceTree = "<group>"; };
@@ -443,7 +439,6 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				7A0E0A0117790EE600C2537F /* Default-568h@2x.png */,
 				8B2B8AE1118BA49F00437315 /* README */,
 				8B4553CA1192158300ABD707 /* Entitlements.plist */,
 				8BF50835118633BB005C936F /* zxing */,
@@ -494,7 +489,6 @@
 				8BF5104C118748C7005C936F /* OTPAuthURLEntryController.xib */,
 				8BF5104D118748C7005C936F /* RootViewController.xib */,
 				8BE5CF5411AB441D00A20746 /* OTPTableViewCell.xib */,
-				8B00365211ECD2390092DE18 /* Default.png */,
 				8BDA1F1213550A7B003EF49C /* Localizable.strings */,
 			);
 			path = Resources;
@@ -672,6 +666,16 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0500;
+				TargetAttributes = {
+					1D6058900D05DD3D006BFB54 = {
+						DevelopmentTeam = VW7G783U7Z;
+						SystemCapabilities = {
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
+					};
+				};
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "OTPAuth" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -783,13 +787,11 @@
 				8BE5C90211A7423700A20746 /* Info.png in Resources */,
 				8BE5CF5511AB441D00A20746 /* OTPTableViewCell.xib in Resources */,
 				8BE5CF7211AB48F700A20746 /* close.png in Resources */,
-				8B00365311ECD2390092DE18 /* Default.png in Resources */,
 				8BC958E8128B5DB500A0E8F2 /* Icon_2x.png in Resources */,
 				8BC958E9128B5DB500A0E8F2 /* Icon-iPad.png in Resources */,
 				8BC958EA128B5DB500A0E8F2 /* Icon.png in Resources */,
 				8BDA1F1313550A7B003EF49C /* Localizable.strings in Resources */,
 				8BF23A7413D4EF7E00F3FD82 /* GoogleNavBarLogo.png in Resources */,
-				7A0E0A0217790EE600C2537F /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

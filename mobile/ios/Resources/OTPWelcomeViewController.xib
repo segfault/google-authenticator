@@ -23,7 +23,9 @@
                     <accessibility key="accessibilityConfiguration">
                         <accessibilityTraits key="traits" none="YES" staticText="YES"/>
                     </accessibility>
-                    <string key="text">Google Authenticator generates verification codes that provide additional security when signing in.To use Google Authenticator you must first add an account by pressing:</string>
+                    <string key="text">Google Authenticator generates verification codes that provide additional security when signing in.
+
+To use Google Authenticator you must first add an account by pressing:</string>
                     <color key="textColor" red="0.20000000000000001" green="0.33333333999999998" blue="0.60000001999999997" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
