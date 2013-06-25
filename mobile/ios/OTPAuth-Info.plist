@@ -41,6 +41,7 @@
 			<array>
 				<string>otpauth</string>
 				<string>totp</string>
+				<string>hotp</string>
 			</array>
 		</dict>
 	</array>
