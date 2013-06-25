@@ -25,6 +25,9 @@
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		28C286E10D94DF7D0034E888 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* RootViewController.m */; };
 		7A0E0A0217790EE600C2537F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A0E0A0117790EE600C2537F /* Default-568h@2x.png */; };
+		7A63F24117791FD2005971F0 /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A63F24017791FD2005971F0 /* DropboxSDK.framework */; };
+		7A63F24317792161005971F0 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A63F24217792161005971F0 /* CoreData.framework */; };
+		7A63F24517792191005971F0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A63F24417792191005971F0 /* QuartzCore.framework */; };
 		8B0022E011E7BF800092DE18 /* OTPTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B0022DF11E7BF800092DE18 /* OTPTableView.m */; };
 		8B0028B511EB75920092DE18 /* OTPScannerOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B0028B411EB75920092DE18 /* OTPScannerOverlayView.m */; };
 		8B00365311ECD2390092DE18 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B00365211ECD2390092DE18 /* Default.png */; };
@@ -135,12 +138,15 @@
 /* Begin PBXFileReference section */
 		1D3623240D0F684500981E51 /* OTPAuthAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTPAuthAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* OTPAuthAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTPAuthAppDelegate.m; sourceTree = "<group>"; };
-		1D6058910D05DD3D006BFB54 /* Authenticator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Authenticator.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D6058910D05DD3D006BFB54 /* BetterAuthenticator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BetterAuthenticator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28A0AAE50D9B0CCF005BE974 /* OTPAuth.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTPAuth.pch; sourceTree = "<group>"; };
 		28C286DF0D94DF7D0034E888 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		28C286E00D94DF7D0034E888 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7A0E0A0117790EE600C2537F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		7A63F24017791FD2005971F0 /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DropboxSDK.framework; path = "externals/dropbox-ios-sdk-1.3.4/DropboxSDK.framework"; sourceTree = "<group>"; };
+		7A63F24217792161005971F0 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		7A63F24417792191005971F0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		8B0022DE11E7BF800092DE18 /* OTPTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTPTableView.h; sourceTree = "<group>"; };
 		8B0022DF11E7BF800092DE18 /* OTPTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTPTableView.m; sourceTree = "<group>"; };
 		8B0028B311EB75920092DE18 /* OTPScannerOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTPScannerOverlayView.h; sourceTree = "<group>"; };
@@ -354,6 +360,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A63F24517792191005971F0 /* QuartzCore.framework in Frameworks */,
+				7A63F24317792161005971F0 /* CoreData.framework in Frameworks */,
 				8B80987113D4FDB500D4FCC8 /* libZXingWidget.a in Frameworks */,
 				8B2B86FE118B8FA000437315 /* UIKit.framework in Frameworks */,
 				8B2B8728118B900E00437315 /* CoreFoundation.framework in Frameworks */,
@@ -363,6 +371,7 @@
 				8B3F0F5A122F2003009A6409 /* AVFoundation.framework in Frameworks */,
 				8BBC772113BA945D006B3033 /* Security.framework in Frameworks */,
 				8B8098E613D4FED600D4FCC8 /* libstdc++.dylib in Frameworks */,
+				7A63F24117791FD2005971F0 /* DropboxSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,7 +434,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1D6058910D05DD3D006BFB54 /* Authenticator.app */,
+				1D6058910D05DD3D006BFB54 /* BetterAuthenticator.app */,
 				8B2B85D7118B8DE400437315 /* OTPAuthUnitTest.app */,
 			);
 			name = Products;
@@ -434,6 +443,8 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				7A63F24417792191005971F0 /* QuartzCore.framework */,
+				7A63F24217792161005971F0 /* CoreData.framework */,
 				7A0E0A0117790EE600C2537F /* Default-568h@2x.png */,
 				8B2B8AE1118BA49F00437315 /* README */,
 				8B4553CA1192158300ABD707 /* Entitlements.plist */,
@@ -492,6 +503,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7A63F24017791FD2005971F0 /* DropboxSDK.framework */,
 				8B80995D13D500E200D4FCC8 /* SenTestingKit.framework */,
 				8B8098E513D4FED600D4FCC8 /* libstdc++.dylib */,
 				8B3F0F59122F2003009A6409 /* AVFoundation.framework */,
@@ -631,7 +643,7 @@
 			);
 			name = OTPAuth;
 			productName = OTPAuth;
-			productReference = 1D6058910D05DD3D006BFB54 /* Authenticator.app */;
+			productReference = 1D6058910D05DD3D006BFB54 /* BetterAuthenticator.app */;
 			productType = "com.apple.product-type.application";
 		};
 		8B2B85D6118B8DE400437315 /* OTPAuthUnitTest */ = {
@@ -1015,6 +1027,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/externals/dropbox-ios-sdk-1.3.4\"",
+				);
 				HEADER_SEARCH_PATHS = ./externals/zxing/cpp/core/src;
 				INFOPLIST_FILE = "OTPAuth-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
@@ -1025,7 +1041,7 @@
 					"-weak_framework",
 					CoreMedia,
 				);
-				PRODUCT_NAME = Authenticator;
+				PRODUCT_NAME = BetterAuthenticator;
 			};
 			name = Debug;
 		};
@@ -1033,6 +1049,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/externals/dropbox-ios-sdk-1.3.4\"",
+				);
 				HEADER_SEARCH_PATHS = ./externals/zxing/cpp/core/src;
 				INFOPLIST_FILE = "OTPAuth-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
@@ -1043,7 +1063,7 @@
 					"-weak_framework",
 					CoreMedia,
 				);
-				PRODUCT_NAME = Authenticator;
+				PRODUCT_NAME = BetterAuthenticator;
 			};
 			name = Release;
 		};
