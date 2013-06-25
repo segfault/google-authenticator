@@ -17,7 +17,7 @@
 		<string>Icon-iPad.png</string>
 	</array>
 	<key>CFBundleIdentifier</key>
-	<string>com.google.${PRODUCT_NAME:rfc1034identifier}</string>
+	<string>info.hasno.apps.${PRODUCT_NAME:rfc1034identifier}</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
