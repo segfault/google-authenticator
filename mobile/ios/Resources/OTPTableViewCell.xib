@@ -35,7 +35,7 @@
                     <rect key="frame" x="10" y="14" width="290" height="36"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Code"/>
-                    <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="30"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
                     <color key="textColor" red="0.20000000000000001" green="0.33333333999999998" blue="0.60000001999999997" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                     <size key="shadowOffset" width="0.0" height="-2"/>
@@ -45,7 +45,7 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Name"/>
                     <color key="textColor" red="0.20000000000000001" green="0.33333333999999998" blue="0.60000001999999997" alpha="1" colorSpace="calibratedRGB"/>
-                    <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="14"/>
                     <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="36"/>
@@ -112,14 +112,14 @@
                     <accessibility key="accessibilityConfiguration" label="IntegrityCheck">
                         <accessibilityTraits key="traits" none="YES" staticText="YES"/>
                     </accessibility>
-                    <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="32"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="32"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Integrity Check Value" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="23">
                     <rect key="frame" x="52" y="49" width="216" height="19"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="13"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>

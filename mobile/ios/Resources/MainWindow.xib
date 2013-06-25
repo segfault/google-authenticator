@@ -18,6 +18,7 @@
                 <outlet property="legalButton" destination="109" id="127"/>
                 <outlet property="navigationController" destination="9" id="123"/>
                 <outlet property="navigationItem" destination="14" id="128"/>
+                <outlet property="settingsButton" destination="hgF-vg-paw" id="clK-7x-csy"/>
                 <outlet property="window" destination="2" id="124"/>
             </connections>
         </customObject>
@@ -44,9 +45,15 @@
                     <toolbarItems>
                         <barButtonItem systemItem="edit" id="107"/>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="110"/>
-                        <barButtonItem title="Legal Information" id="109">
+                        <barButtonItem title="Legal" id="109">
                             <connections>
                                 <action selector="showLegalInformation:" destination="3" id="112"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="mnI-EB-qp1"/>
+                        <barButtonItem title="⚙" id="hgF-vg-paw">
+                            <connections>
+                                <action selector="showSettings:" destination="3" id="dCq-l5-t2j"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="108"/>
@@ -56,7 +63,7 @@
                             </connections>
                         </barButtonItem>
                     </toolbarItems>
-                    <navigationItem key="navigationItem" title="Google Authenticator" id="14"/>
+                    <navigationItem key="navigationItem" title="Better Authenticator" id="14"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
@@ -70,7 +77,7 @@
                 </viewController>
             </viewControllers>
             <toolbar key="toolbar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="18">
-                <rect key="frame" x="0.0" y="416" width="320" height="44"/>
+                <rect key="frame" x="0.0" y="436" width="320" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
             </toolbar>

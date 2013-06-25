@@ -61,6 +61,7 @@ static NSString *const kOTPKeychainEntriesArray = @"OTPKeychainEntries";
 @synthesize urlAddAlert = urlAddAlert_;
 @synthesize authURLEntryNavigationItem = authURLEntryNavigationItem_;
 @synthesize legalButton = legalButton_;
+@synthesize settingsButton = settingsButton_;
 @synthesize navigationItem = navigationItem_;
 @synthesize urlBeingAdded = urlBeingAdded_;
 
@@ -73,6 +74,7 @@ static NSString *const kOTPKeychainEntriesArray = @"OTPKeychainEntries";
   self.editButton = nil;
   self.urlBeingAdded = nil;
   self.legalButton = nil;
+  self.settingsButton = nil;
   self.navigationItem = nil;
   self.urlAddAlert = nil;
   self.authURLEntryNavigationItem = nil;
@@ -81,10 +83,13 @@ static NSString *const kOTPKeychainEntriesArray = @"OTPKeychainEntries";
 
 - (void)awakeFromNib {
   self.legalButton.title
-    = GTMLocalizedString(@"Legal Information",
+    = GTMLocalizedString(@"Legal",
                          @"Legal Information Button Title");
+  self.settingsButton.title
+    = GTMLocalizedString(@"⚙",
+                       @"Settings Button Title");
   self.navigationItem.title
-    = GTMLocalizedString(@"Google Authenticator",
+    = GTMLocalizedString(@"Better Authenticator",
                          @"Product Name");
   self.authURLEntryNavigationItem.title
     = GTMLocalizedString(@"Add Token",
@@ -378,6 +383,12 @@ static NSString *const kOTPKeychainEntriesArray = @"OTPKeychainEntries";
 - (IBAction)showLegalInformation:(id)sender {
   OTPAuthAboutController *controller
       = [[[OTPAuthAboutController alloc] init] autorelease];
+  [self.navigationController pushViewController:controller animated:YES];
+}
+
+- (IBAction)showSettings:(id)sender {
+  OTPAuthAboutController *controller
+  = [[[OTPAuthAboutController alloc] init] autorelease];
   [self.navigationController pushViewController:controller animated:YES];
 }
 

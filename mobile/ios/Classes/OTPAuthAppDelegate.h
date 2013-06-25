@@ -36,10 +36,12 @@ typedef enum {
 @property(nonatomic, retain) IBOutlet UIWindow *window;
 @property(nonatomic, retain) IBOutlet UINavigationController *authURLEntryController;
 @property(nonatomic, retain) IBOutlet UIBarButtonItem *legalButton;
+@property(nonatomic, retain) IBOutlet UIBarButtonItem *settingsButton;
 @property(nonatomic, retain) IBOutlet UINavigationItem *navigationItem;
 @property(nonatomic, retain) IBOutlet UINavigationItem *authURLEntryNavigationItem;
 
 - (IBAction)addAuthURL:(id)sender;
 - (IBAction)showLegalInformation:(id)sender;
+- (IBAction)showSettings:(id)sender;
 
 @end

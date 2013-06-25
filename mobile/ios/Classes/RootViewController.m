@@ -63,7 +63,7 @@
   view.backgroundColor = [UIColor googleBlueBackgroundColor];
 
   UIButton *titleButton = [[[UIButton alloc] init] autorelease];
-  [titleButton setTitle:GTMLocalizedString(@"BetterAuthenticator", nil)
+  [titleButton setTitle:GTMLocalizedString(@"Better Authenticator", nil)
                forState:UIControlStateNormal];
   UILabel *titleLabel = [titleButton titleLabel];
   titleLabel.font = [UIFont boldSystemFontOfSize:20.0];
@@ -71,6 +71,8 @@
     titleLabel.shadowOffset = CGSizeMake(0.0, -1.0);
     [titleButton setTitleShadowColor:[UIColor colorWithWhite:0.0 alpha:0.5]
                             forState:UIControlStateNormal];
+  } else {
+    [titleButton setTitleColor:[UIColor googleBlueTextColor] forState:UIControlStateNormal];
   }
   titleButton.adjustsImageWhenHighlighted = NO;
   [titleButton sizeToFit];
