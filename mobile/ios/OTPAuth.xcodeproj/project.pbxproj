@@ -24,6 +24,8 @@
 		1D3623260D0F684500981E51 /* OTPAuthAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* OTPAuthAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		28C286E10D94DF7D0034E888 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* RootViewController.m */; };
+		7A2B742D177BB80400F687DC /* libTICoreDataSync-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A2B7429177BB6CE00F687DC /* libTICoreDataSync-iOS.a */; };
+		7A2B7431177BC42B00F687DC /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A2B7430177BC42A00F687DC /* libz.dylib */; };
 		7A63F24117791FD2005971F0 /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A63F24017791FD2005971F0 /* DropboxSDK.framework */; };
 		7A63F24317792161005971F0 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A63F24217792161005971F0 /* CoreData.framework */; };
 		7A63F24517792191005971F0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A63F24417792191005971F0 /* QuartzCore.framework */; };
@@ -104,6 +106,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		7A2B7428177BB6CE00F687DC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7A2B7424177BB6CD00F687DC /* TICoreDataSync-iOS.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 13023C3D161363D50071C497;
+			remoteInfo = "TICoreDataSync-iOS";
+		};
+		7A2B742B177BB7E000F687DC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7A2B7424177BB6CD00F687DC /* TICoreDataSync-iOS.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 13023C3C161363D50071C497;
+			remoteInfo = "TICoreDataSync-iOS";
+		};
 		7AC7F0971779136800D513CB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8BF508691186346F005C936F /* ZXingWidget.xcodeproj */;
@@ -142,6 +158,8 @@
 		28C286DF0D94DF7D0034E888 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		28C286E00D94DF7D0034E888 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		7A2B7424177BB6CD00F687DC /* TICoreDataSync-iOS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "TICoreDataSync-iOS.xcodeproj"; path = "externals/TICoreDataSync/TICoreDataSync-iOS.xcodeproj"; sourceTree = "<group>"; };
+		7A2B7430177BC42A00F687DC /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		7A63F24017791FD2005971F0 /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DropboxSDK.framework; path = "externals/dropbox-ios-sdk-1.3.4/DropboxSDK.framework"; sourceTree = "<group>"; };
 		7A63F24217792161005971F0 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		7A63F24417792191005971F0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -358,6 +376,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A2B7431177BC42B00F687DC /* libz.dylib in Frameworks */,
+				7A2B742D177BB80400F687DC /* libTICoreDataSync-iOS.a in Frameworks */,
 				7A63F24517792191005971F0 /* QuartzCore.framework in Frameworks */,
 				7A63F24317792161005971F0 /* CoreData.framework in Frameworks */,
 				8B80987113D4FDB500D4FCC8 /* libZXingWidget.a in Frameworks */,
@@ -441,6 +461,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				7A2B7424177BB6CD00F687DC /* TICoreDataSync-iOS.xcodeproj */,
 				8B2B8AE1118BA49F00437315 /* README */,
 				8B4553CA1192158300ABD707 /* Entitlements.plist */,
 				8BF50835118633BB005C936F /* zxing */,
@@ -500,6 +521,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7A2B7430177BC42A00F687DC /* libz.dylib */,
 				7A63F24417792191005971F0 /* QuartzCore.framework */,
 				7A63F24217792161005971F0 /* CoreData.framework */,
 				7A63F24017791FD2005971F0 /* DropboxSDK.framework */,
@@ -514,6 +536,14 @@
 				8B2B86FD118B8FA000437315 /* UIKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7A2B7425177BB6CD00F687DC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7A2B7429177BB6CE00F687DC /* libTICoreDataSync-iOS.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		8B2B888E118B92DC00437315 /* Foundation */ = {
@@ -637,6 +667,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				7A2B742C177BB7E000F687DC /* PBXTargetDependency */,
 				8B3F0E76122F134D009A6409 /* PBXTargetDependency */,
 				8BF23A2F13D4ED5200F3FD82 /* PBXTargetDependency */,
 			);
@@ -744,6 +775,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = 7A2B7425177BB6CD00F687DC /* Products */;
+					ProjectRef = 7A2B7424177BB6CD00F687DC /* TICoreDataSync-iOS.xcodeproj */;
+				},
+				{
 					ProductGroup = 8BF23A2913D4ED3800F3FD82 /* Products */;
 					ProjectRef = 8BF508691186346F005C936F /* ZXingWidget.xcodeproj */;
 				},
@@ -758,6 +793,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		7A2B7429177BB6CE00F687DC /* libTICoreDataSync-iOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libTICoreDataSync-iOS.a";
+			remoteRef = 7A2B7428177BB6CE00F687DC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		7AC7F0981779136800D513CB /* ZXingTests.octest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
@@ -901,6 +943,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		7A2B742C177BB7E000F687DC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "TICoreDataSync-iOS";
+			targetProxy = 7A2B742B177BB7E000F687DC /* PBXContainerItemProxy */;
+		};
 		8B3F0E76122F134D009A6409 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8B2B8562118B884200437315 /* GenerateArtwork */;
