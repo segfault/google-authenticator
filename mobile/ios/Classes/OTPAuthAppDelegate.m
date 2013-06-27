@@ -16,6 +16,8 @@
 //  the License.
 //
 
+
+
 #import "OTPAuthAppDelegate.h"
 #import "GTMDefines.h"
 #import "OTPAuthURL.h"
@@ -28,6 +30,8 @@
 #import "UIColor+MobileColors.h"
 #import "GTMLocalizedString.h"
 #import <DropboxSDK/DropboxSDK.h>
+#import "OTPAccount.h"
+
 
 static NSString *const kOTPKeychainEntriesArray = @"OTPKeychainEntries";
 

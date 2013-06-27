@@ -160,6 +160,9 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7A2B7424177BB6CD00F687DC /* TICoreDataSync-iOS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "TICoreDataSync-iOS.xcodeproj"; path = "externals/TICoreDataSync/TICoreDataSync-iOS.xcodeproj"; sourceTree = "<group>"; };
 		7A2B7430177BC42A00F687DC /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		7A2B7433177BC5AB00F687DC /* OTPAuthModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = OTPAuthModel.xcdatamodel; sourceTree = "<group>"; };
+		7A2B7434177BCA3600F687DC /* OTPAccount.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTPAccount.h; sourceTree = "<group>"; };
+		7A2B7435177BCA3600F687DC /* OTPAccount.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTPAccount.m; sourceTree = "<group>"; };
 		7A63F24017791FD2005971F0 /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DropboxSDK.framework; path = "externals/dropbox-ios-sdk-1.3.4/DropboxSDK.framework"; sourceTree = "<group>"; };
 		7A63F24217792161005971F0 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		7A63F24417792191005971F0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -445,6 +448,9 @@
 				8B2B89B7118B967A00437315 /* TOTPGeneratorTest.m */,
 				8B45557611932B5D00ABD707 /* OTPAuthBarClock.h */,
 				8B45557711932B5D00ABD707 /* OTPAuthBarClock.m */,
+				7A2B7432177BC5AB00F687DC /* OTPAuthModel.xcdatamodeld */,
+				7A2B7434177BCA3600F687DC /* OTPAccount.h */,
+				7A2B7435177BCA3600F687DC /* OTPAccount.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1086,7 +1092,10 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/externals/dropbox-ios-sdk-1.3.4\"",
 				);
-				HEADER_SEARCH_PATHS = ./externals/zxing/cpp/core/src;
+				HEADER_SEARCH_PATHS = (
+					./externals/zxing/cpp/core/src,
+					"./externals/TICoreDataSync/TICoreDataSync/**",
+				);
 				INFOPLIST_FILE = "OTPAuth-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LIBRARY_SEARCH_PATHS = "./externals/libs/**";
@@ -1109,7 +1118,10 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/externals/dropbox-ios-sdk-1.3.4\"",
 				);
-				HEADER_SEARCH_PATHS = ./externals/zxing/cpp/core/src;
+				HEADER_SEARCH_PATHS = (
+					./externals/zxing/cpp/core/src,
+					"./externals/TICoreDataSync/TICoreDataSync/**",
+				);
 				INFOPLIST_FILE = "OTPAuth-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LIBRARY_SEARCH_PATHS = "./externals/libs/**";
@@ -1230,6 +1242,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		7A2B7432177BC5AB00F687DC /* OTPAuthModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				7A2B7433177BC5AB00F687DC /* OTPAuthModel.xcdatamodel */,
+			);
+			currentVersion = 7A2B7433177BC5AB00F687DC /* OTPAuthModel.xcdatamodel */;
+			path = OTPAuthModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
 }
