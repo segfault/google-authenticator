@@ -30,6 +30,7 @@
 		7A63F24317792161005971F0 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A63F24217792161005971F0 /* CoreData.framework */; };
 		7A63F24517792191005971F0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A63F24417792191005971F0 /* QuartzCore.framework */; };
 		7AC4D0271779D80A005CF092 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AC4D0261779D809005CF092 /* Default-568h@2x.png */; };
+		7AC7BB67177E8D1C009EED6F /* OTPAuthModel.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = 7A2B7432177BC5AB00F687DC /* OTPAuthModel.xcdatamodeld */; };
 		8B0022E011E7BF800092DE18 /* OTPTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B0022DF11E7BF800092DE18 /* OTPTableView.m */; };
 		8B0028B511EB75920092DE18 /* OTPScannerOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B0028B411EB75920092DE18 /* OTPScannerOverlayView.m */; };
 		8B00BE9A13748ABA00B36076 /* LegalNotices.html in Resources */ = {isa = PBXBuildFile; fileRef = 8B00BE9913748ABA00B36076 /* LegalNotices.html */; };
@@ -448,7 +449,6 @@
 				8B2B89B7118B967A00437315 /* TOTPGeneratorTest.m */,
 				8B45557611932B5D00ABD707 /* OTPAuthBarClock.h */,
 				8B45557711932B5D00ABD707 /* OTPAuthBarClock.m */,
-				7A2B7432177BC5AB00F687DC /* OTPAuthModel.xcdatamodeld */,
 				7A2B7434177BCA3600F687DC /* OTPAccount.h */,
 				7A2B7435177BCA3600F687DC /* OTPAccount.m */,
 			);
@@ -497,6 +497,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7A2B7432177BC5AB00F687DC /* OTPAuthModel.xcdatamodeld */,
 				7AC4D0261779D809005CF092 /* Default-568h@2x.png */,
 				8BF23A7313D4EF7E00F3FD82 /* GoogleNavBarLogo.png */,
 				8BC958E4128B5DB500A0E8F2 /* Icon_2x.png */,
@@ -827,6 +828,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7AC7BB67177E8D1C009EED6F /* OTPAuthModel.xcdatamodeld in Resources */,
 				8BF51053118748C7005C936F /* OTPAuthAboutController.xib in Resources */,
 				8BF51055118748C7005C936F /* MainWindow.xib in Resources */,
 				8B00BE9A13748ABA00B36076 /* LegalNotices.html in Resources */,
@@ -1250,7 +1252,8 @@
 				7A2B7433177BC5AB00F687DC /* OTPAuthModel.xcdatamodel */,
 			);
 			currentVersion = 7A2B7433177BC5AB00F687DC /* OTPAuthModel.xcdatamodel */;
-			path = OTPAuthModel.xcdatamodeld;
+			name = OTPAuthModel.xcdatamodeld;
+			path = ../Classes/OTPAuthModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

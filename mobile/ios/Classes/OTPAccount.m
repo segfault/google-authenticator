@@ -11,11 +11,17 @@
 
 @implementation OTPAccount
 
+@property (nonatomic, retain) OTPAuthUrl *url;
+
 @dynamic name;
 @dynamic url;
 @dynamic sortRank;
 @dynamic dateAdded;
 @dynamic dateUpdated;
 @dynamic tag;
+
+- (OTPAuthURL *)asAuthUrl() {
+  return nil;
+}
 
 @end

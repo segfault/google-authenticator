@@ -32,7 +32,6 @@
 @property(readwrite, copy, nonatomic) NSString *name;
 @property(readonly, nonatomic) NSString *otpCode;
 @property(readonly, nonatomic) NSString *checkCode;
-@property(readonly, retain, nonatomic) NSData *keychainItemRef;
 
 // Standard base32 alphabet.
 // Input is case insensitive.
@@ -45,23 +44,12 @@
 
 + (OTPAuthURL *)authURLWithURL:(NSURL *)url
                         secret:(NSData *)secret;
-+ (OTPAuthURL *)authURLWithKeychainItemRef:(NSData *)keychainItemRef;
 
 // Returns a reconstructed NSURL object representing the current state of the
 // |generator|.
 - (NSURL *)url;
 
-// Saves the current object state to the keychain.
-- (BOOL)saveToKeychain;
 
-// Removes the current object state from the keychain.
-- (BOOL)removeFromKeychain;
-
-// Returns true if the object was loaded from or subsequently added to the
-// iPhone keychain.
-// It does not assert that the keychain is up to date with the latest
-// |generator| state.
-- (BOOL)isInKeychain;
 
 - (NSString*)checkCode;
 

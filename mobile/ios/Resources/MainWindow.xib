@@ -5,11 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3682.9"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OTPAuthApplication">
-            <connections>
-                <outlet property="delegate" destination="3" id="4"/>
-            </connections>
-        </placeholder>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OTPAuthApplication"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <customObject id="3" customClass="OTPAuthAppDelegate">
             <connections>
@@ -23,10 +19,14 @@
             </connections>
         </customObject>
         <window opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" resizesToFullScreen="NO" id="2">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <color key="backgroundColor" red="0.92156863" green="0.93725491000000005" blue="0.97647059000000003" alpha="1" colorSpace="calibratedRGB"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <connections>
+                <outlet property="rootViewController" destination="9" id="NwZ-wD-N1A"/>
+            </connections>
         </window>
         <navigationController toolbarHidden="NO" id="9">
             <extendedEdge key="edgesForExtendedLayout"/>
@@ -34,10 +34,13 @@
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
-            <nil key="simulatedDestinationMetrics"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
             <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="11">
                 <autoresizingMask key="autoresizingMask"/>
                 <color key="tintColor" red="0.36078431999999999" green="0.49019607999999998" blue="0.82352941999999996" alpha="1" colorSpace="calibratedRGB"/>
+                <connections>
+                    <outlet property="delegate" destination="3" id="gJT-4r-Ooo"/>
+                </connections>
             </navigationBar>
             <viewControllers>
                 <viewController nibName="RootViewController" id="13" customClass="RootViewController">
@@ -71,18 +74,17 @@
                     <nil key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="addItem" destination="17" id="120"/>
-                        <outlet property="delegate_" destination="3" id="84"/>
                         <outlet property="legalItem" destination="109" id="121"/>
                     </connections>
                 </viewController>
             </viewControllers>
             <toolbar key="toolbar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="18">
-                <rect key="frame" x="0.0" y="436" width="320" height="44"/>
+                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
             </toolbar>
             <connections>
-                <outlet property="delegate" destination="3" id="31"/>
+                <outlet property="delegate" destination="18" id="g45-so-Csy"/>
             </connections>
         </navigationController>
         <navigationController id="90">
@@ -116,9 +118,6 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <nil key="simulatedDestinationMetrics"/>
-                    <connections>
-                        <outlet property="delegate_" destination="3" id="102"/>
-                    </connections>
                 </viewController>
             </viewControllers>
         </navigationController>

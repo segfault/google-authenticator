@@ -17,14 +17,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
+#import <TICoreDataSync.h>
 
 @class OTPAuthBarClock;
 
-@interface RootViewController : UITableViewController
+@interface RootViewController : UITableViewController <NSFetchedResultsControllerDelegate>
 
-@property(nonatomic, readwrite, assign) id<UITableViewDataSource, UITableViewDelegate> delegate;
 @property(nonatomic, readonly, retain) OTPAuthBarClock *clock;
 @property(nonatomic, readwrite, retain) IBOutlet UIBarButtonItem *addItem;
 @property(nonatomic, readwrite, retain) IBOutlet UIBarButtonItem *legalItem;
+@property(nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
+@property(nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 
 @end

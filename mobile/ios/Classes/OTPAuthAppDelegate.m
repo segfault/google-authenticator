@@ -39,7 +39,7 @@ static NSString *const kOTPKeychainEntriesArray = @"OTPKeychainEntries";
 @property(readwrite, nonatomic, retain) OTPAuthURL *authURL;
 @end
 
-@interface OTPAuthAppDelegate ()
+@interface OTPAuthAppDelegate () <DBSessionDelegate, TICDSApplicationSyncManagerDelegate, TICDSDocumentSyncManagerDelegate>
 // The OTPAuthURL objects in this array are loaded from the keychain at
 // startup and serialized there on shutdown.
 @property (nonatomic, retain) NSMutableArray *authURLs;
@@ -49,7 +49,6 @@ static NSString *const kOTPKeychainEntriesArray = @"OTPKeychainEntries";
 @property (nonatomic, retain) OTPAuthURL *urlBeingAdded;
 @property (nonatomic, retain) UIAlertView *urlAddAlert;
 
-- (void)saveKeychainArray;
 - (void)updateUI;
 - (void)updateEditing:(UITableView *)tableview;
 @end
@@ -68,6 +67,9 @@ static NSString *const kOTPKeychainEntriesArray = @"OTPKeychainEntries";
 @synthesize settingsButton = settingsButton_;
 @synthesize navigationItem = navigationItem_;
 @synthesize urlBeingAdded = urlBeingAdded_;
+@synthesize managedObjectContext=__managedObjectContext;
+@synthesize managedObjectModel=__managedObjectModel;
+@synthesize persistentStoreCoordinator=__persistentStoreCoordinator;
 
 - (void)dealloc {
   self.window = nil;
@@ -82,7 +84,19 @@ static NSString *const kOTPKeychainEntriesArray = @"OTPKeychainEntries";
   self.navigationItem = nil;
   self.urlAddAlert = nil;
   self.authURLEntryNavigationItem = nil;
+
+  [__managedObjectContext release];
+  [__managedObjectModel release];
+  [__persistentStoreCoordinator release];
+  [__managedObjectContext release];
   [super dealloc];
+}
+
+#pragma mark Apple Stuff
+- (void)applicationWillTerminate:(UIApplication *)application
+{
+  // Saves changes in the application's managed object context before the application terminates.
+  [self saveContext];
 }
 
 - (void)awakeFromNib {
@@ -98,6 +112,28 @@ static NSString *const kOTPKeychainEntriesArray = @"OTPKeychainEntries";
   self.authURLEntryNavigationItem.title
     = GTMLocalizedString(@"Add Token",
                          @"Add Token Navigation Screen Title");
+  
+  RootViewController *rootViewController = (RootViewController *)[self.navigationController topViewController];   
+  rootViewController.managedObjectContext = self.managedObjectContext; 
+}
+
+- (void)saveContext
+{
+  NSError *error = nil;
+  NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
+  if (managedObjectContext != nil)
+  {
+    if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error])
+    {
+      /*
+       Replace this implementation with code to handle the error appropriately.
+       
+       abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
+       */
+      NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+      abort();
+    }
+  }
 }
 
 - (void)updateEditing:(UITableView *)tableView {
@@ -118,40 +154,38 @@ static NSString *const kOTPKeychainEntriesArray = @"OTPKeychainEntries";
   self.editButton.enabled = [self.authURLs count] > 0;
 }
 
-- (void)saveKeychainArray {
-  NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-  NSArray *keychainReferences = [self valueForKeyPath:@"authURLs.keychainItemRef"];
-  [ud setObject:keychainReferences forKey:kOTPKeychainEntriesArray];
-  [ud synchronize];
-}
 
 #pragma mark -
 #pragma mark Application Delegate
 
 - (BOOL)application:(UIApplication *)application
     didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-  DBSession* dbSession = [[[DBSession alloc]
-                            initWithAppKey:@"8wepacxs7pwbjvc"
-                            appSecret:@"ls8797auelpazd5"
-                           root:kDBRootAppFolder] autorelease];
-  [DBSession setSharedSession:dbSession];
     
   NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-  NSArray *savedKeychainReferences = [ud arrayForKey:kOTPKeychainEntriesArray];
-  self.authURLs
-      = [NSMutableArray arrayWithCapacity:[savedKeychainReferences count]];
-  for (NSData *keychainRef in savedKeychainReferences) {
-    OTPAuthURL *authURL = [OTPAuthURL authURLWithKeychainItemRef:keychainRef];
-    if (authURL) {
-      [self.authURLs addObject:authURL];
-    }
-  }
-
-  self.rootViewController
-    = (RootViewController*)[self.navigationController topViewController];
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(activityDidIncrease:) name:TICDSApplicationSyncManagerDidIncreaseActivityNotification object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(activityDidDecrease:) name:TICDSApplicationSyncManagerDidDecreaseActivityNotification object:nil];
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(activityDidIncrease:) name:TICDSDocumentSyncManagerDidIncreaseActivityNotification object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(activityDidDecrease:) name:TICDSDocumentSyncManagerDidDecreaseActivityNotification object:nil];
+  
+  
+  self.rootViewController = (RootViewController*)[self.navigationController topViewController];
   [self.window addSubview:self.navigationController.view];
-
+  
   [self.window makeKeyAndVisible];
+  
+  DBSession* dbSession = [[[DBSession alloc] initWithAppKey:@"8wepacxs7pwbjvc" appSecret:@"ls8797auelpazd5" root:kDBRootAppFolder] autorelease];
+  dbSession.delegate = self;
+  [DBSession setSharedSession:dbSession];
+  [dbSession release];
+  
+  if ([[DBSession sharedSession] isLinked]) {
+    [self registerSyncManager];
+  } else {
+    [[DBSession sharedSession] linkFromController:self.navigationController];
+  }
+  
   return YES;
 }
 
@@ -176,6 +210,17 @@ static NSString *const kOTPKeychainEntriesArray = @"OTPKeychainEntries";
     self.urlBeingAdded = authURL;
     [self.urlAddAlert show];
   }
+  
+  
+  if ([[DBSession sharedSession] handleOpenURL:url]) {
+    if ([[DBSession sharedSession] isLinked]) {
+      NSLog(@"App linked successfully!");
+      [self registerSyncManager];
+    }
+    
+    return YES;
+  }
+  
   return authURL != nil;
 }
 
@@ -186,9 +231,6 @@ static NSString *const kOTPKeychainEntriesArray = @"OTPKeychainEntries";
               didCreateAuthURL:(OTPAuthURL *)authURL {
   [self.navigationController dismissViewControllerAnimated:YES completion:nil];
   [self.navigationController popToRootViewControllerAnimated:NO];
-  [authURL saveToKeychain];
-  [self.authURLs addObject:authURL];
-  [self saveKeychainArray];
   [self updateUI];
   UITableView *tableView = (UITableView*)self.rootViewController.view;
   [tableView reloadData];
@@ -214,8 +256,8 @@ static NSString *const kOTPKeychainEntriesArray = @"OTPKeychainEntries";
     UIToolbar *toolbar = self.navigationController.toolbar;
     NSMutableArray *items = [NSMutableArray arrayWithArray:toolbar.items];
     // We are replacing our "proxy edit button" with a real one.
-    [items replaceObjectAtIndex:0 withObject:self.editButton];
-    toolbar.items = items;
+    //[items replaceObjectAtIndex:0 withObject:self.editButton];
+    //toolbar.items = items;
 
     [self updateUI];
   }
@@ -266,7 +308,6 @@ static NSString *const kOTPKeychainEntriesArray = @"OTPKeychainEntries";
   NSUInteger oldIndex = [fromIndexPath row];
   NSUInteger newIndex = [toIndexPath row];
   [self.authURLs exchangeObjectAtIndex:oldIndex withObjectAtIndex:newIndex];
-  [self saveKeychainArray];
 }
 
 - (void)tableView:(UITableView *)tableView
@@ -291,9 +332,8 @@ static NSString *const kOTPKeychainEntriesArray = @"OTPKeychainEntries";
       [tableView deleteSections:set
                withRowAnimation:UITableViewRowAnimationFade];
     }
-    [authURL removeFromKeychain];
+    
     [self.authURLs removeObjectAtIndex:idx];
-    [self saveKeychainArray];
     [tableView endUpdates];
     [self updateUI];
     if ([self.authURLs count] == 0 && self.editingState != kOTPEditingSingleRow) {
@@ -391,6 +431,264 @@ static NSString *const kOTPKeychainEntriesArray = @"OTPKeychainEntries";
   = [[[OTPAuthAboutController alloc] init] autorelease];
   [self.navigationController pushViewController:controller animated:YES];
 }
+
+- (IBAction)beginSync:(id)sender {
+  // Save the managed object context to cause sync change objects to be written
+  NSError *saveError = nil;
+  [self.managedObjectContext save:&saveError];
+  if (saveError != nil) {
+    NSLog(@"%s %@", __PRETTY_FUNCTION__, saveError);
+  }
+  
+  [self.documentSyncManager initiateSynchronization];
+}
+
+- (void)registerSyncManager
+{
+  TICDSDropboxSDKBasedApplicationSyncManager *manager = [TICDSDropboxSDKBasedApplicationSyncManager defaultApplicationSyncManager];
+  
+  NSString *clientUuid = [[NSUserDefaults standardUserDefaults] stringForKey:@"iOSNotebookAppSyncClientUUID"];
+  if (clientUuid == nil) {
+    clientUuid = [TICDSUtilities uuidString];
+    [[NSUserDefaults standardUserDefaults] setValue:clientUuid forKey:@"iOSNotebookAppSyncClientUUID"];
+  }
+  
+  NSString *deviceDescription = [[UIDevice currentDevice] name];
+  
+  [manager registerWithDelegate:self
+            globalAppIdentifier:@"info.hasno.app.BetterAuthenticator"
+         uniqueClientIdentifier:clientUuid
+                    description:deviceDescription
+                       userInfo:nil];
+}
+
+#pragma mark - TICDSApplicationSyncManagerDelegate methods
+
+- (void)applicationSyncManagerDidPauseRegistrationToAskWhetherToUseEncryptionForFirstTimeRegistration:(TICDSApplicationSyncManager *)aSyncManager
+{
+  [aSyncManager continueRegisteringWithEncryptionPassword:@"password"];
+}
+
+- (void)applicationSyncManagerDidPauseRegistrationToRequestPasswordForEncryptedApplicationSyncData:(TICDSApplicationSyncManager *)aSyncManager
+{
+  [aSyncManager continueRegisteringWithEncryptionPassword:@"password"];
+}
+
+- (TICDSDocumentSyncManager *)applicationSyncManager:(TICDSApplicationSyncManager *)aSyncManager preConfiguredDocumentSyncManagerForDownloadedDocumentWithIdentifier:(NSString *)anIdentifier atURL:(NSURL *)aFileURL
+{
+  return nil;
+}
+
+- (void)applicationSyncManagerDidFinishRegistering:(TICDSApplicationSyncManager *)aSyncManager
+{
+  self.managedObjectContext.synchronized = YES;
+  
+  TICDSDropboxSDKBasedDocumentSyncManager *docSyncManager = [[TICDSDropboxSDKBasedDocumentSyncManager alloc] init];
+  
+  [docSyncManager registerWithDelegate:self
+                        appSyncManager:aSyncManager
+                  managedObjectContext:[self managedObjectContext]
+                    documentIdentifier:@"OTPAccount"
+                           description:@"OTP account data"
+                              userInfo:nil];
+  
+  [self setDocumentSyncManager:docSyncManager];
+  [docSyncManager release];
+}
+
+#pragma mark - TICDSDocumentSyncManagerDelegate methods
+
+- (void)documentSyncManager:(TICDSDocumentSyncManager *)aSyncManager didPauseSynchronizationAwaitingResolutionOfSyncConflict:(id)aConflict
+{
+  [aSyncManager continueSynchronizationByResolvingConflictWithResolutionType:TICDSSyncConflictResolutionTypeLocalWins];
+}
+
+- (NSURL *)documentSyncManager:(TICDSDocumentSyncManager *)aSyncManager URLForWholeStoreToUploadForDocumentWithIdentifier:(NSString *)anIdentifier description:(NSString *)aDescription userInfo:(NSDictionary *)userInfo
+{
+  return [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"OTPAccounts.sqlite"];
+}
+
+- (void)documentSyncManager:(TICDSDocumentSyncManager *)aSyncManager didPauseRegistrationAsRemoteFileStructureDoesNotExistForDocumentWithIdentifier:(NSString *)anIdentifier description:(NSString *)aDescription userInfo:(NSDictionary *)userInfo
+{
+  self.downloadStoreAfterRegistering = NO;
+  [aSyncManager continueRegistrationByCreatingRemoteFileStructure:YES];
+}
+
+- (void)documentSyncManager:(TICDSDocumentSyncManager *)aSyncManager didPauseRegistrationAsRemoteFileStructureWasDeletedForDocumentWithIdentifier:(NSString *)anIdentifier description:(NSString *)aDescription userInfo:(NSDictionary *)userInfo
+{
+  self.downloadStoreAfterRegistering = NO;
+  [aSyncManager continueRegistrationByCreatingRemoteFileStructure:YES];
+}
+
+- (void)documentSyncManagerDidFinishRegistering:(TICDSDocumentSyncManager *)aSyncManager
+{
+  if (self.shouldDownloadStoreAfterRegistering) {
+    [aSyncManager initiateDownloadOfWholeStore];
+  } else {
+    [aSyncManager initiateSynchronization];
+  }
+  
+  [aSyncManager beginPollingRemoteStorageForChanges];
+}
+
+- (void)documentSyncManagerDidDetermineThatClientHadPreviouslyBeenDeletedFromSynchronizingWithDocument:(TICDSDocumentSyncManager *)aSyncManager
+{
+  self.downloadStoreAfterRegistering = YES;
+}
+
+- (BOOL)documentSyncManagerShouldUploadWholeStoreAfterDocumentRegistration:(TICDSDocumentSyncManager *)aSyncManager
+{
+  return self.shouldDownloadStoreAfterRegistering == NO;
+}
+
+- (void)documentSyncManager:(TICDSDocumentSyncManager *)aSyncManager willReplaceStoreWithDownloadedStoreAtURL:(NSURL *)aStoreURL
+{
+  NSError *anyError = nil;
+  BOOL success = [self.persistentStoreCoordinator removePersistentStore:[self.persistentStoreCoordinator persistentStoreForURL:aStoreURL] error:&anyError];
+  
+  if (success == NO) {
+    NSLog(@"Failed to remove persistent store at %@: %@", aStoreURL, anyError);
+  }
+}
+
+- (void)documentSyncManager:(TICDSDocumentSyncManager *)aSyncManager didReplaceStoreWithDownloadedStoreAtURL:(NSURL *)aStoreURL
+{
+  NSError *anyError = nil;
+  id store = [self.persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:aStoreURL options:nil error:&anyError];
+  
+  if (store == nil) {
+    NSLog(@"Failed to add persistent store at %@: %@", aStoreURL, anyError);
+  }
+}
+
+- (BOOL)documentSyncManager:(TICDSDocumentSyncManager *)aSyncManager shouldBeginSynchronizingAfterManagedObjectContextDidSave:(NSManagedObjectContext *)aMoc;
+{
+  return YES;
+}
+
+- (void)documentSyncManager:(TICDSDocumentSyncManager *)aSyncManager didMakeChangesToObjectsInBackgroundContextAndSaveWithNotification:(NSNotification *)aNotification
+{
+  NSError *saveError = nil;
+  [self.managedObjectContext save:&saveError];
+  if (saveError != nil) {
+    NSLog(@"%s %@", __PRETTY_FUNCTION__, saveError);
+  }
+}
+
+- (void)documentSyncManager:(TICDSDocumentSyncManager *)aSyncManager didFailToSynchronizeWithError:(NSError *)anError
+{
+  NSLog(@"%s %@", __PRETTY_FUNCTION__, anError);
+}
+
+#pragma mark - DBSessionDelegate methods
+
+- (void)sessionDidReceiveAuthorizationFailure:(DBSession *)session userId:(NSString *)userId
+{
+  [[DBSession sharedSession] linkFromController:self.navigationController];
+}
+
+#pragma mark - Core Data stack
+
+/**
+ Returns the managed object context for the application.
+ If the context doesn't already exist, it is created and bound to the persistent store coordinator for the application.
+ */
+- (NSManagedObjectContext *)managedObjectContext
+{
+  if (__managedObjectContext != nil)
+  {
+    return __managedObjectContext;
+  }
+  
+  NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
+  if (coordinator != nil)
+  {
+    __managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+    [__managedObjectContext setPersistentStoreCoordinator:coordinator];
+  }
+  return __managedObjectContext;
+}
+
+/**
+ Returns the managed object model for the application.
+ If the model doesn't already exist, it is created from the application's model.
+ */
+- (NSManagedObjectModel *)managedObjectModel
+{
+  if (__managedObjectModel != nil)
+  {
+    return __managedObjectModel;
+  }
+  NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"OTPAuthModel" withExtension:@"momd"];
+  __managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+  
+  NSLog(@"%@", __managedObjectModel);
+  return __managedObjectModel;
+}
+
+/**
+ Returns the persistent store coordinator for the application.
+ If the coordinator doesn't already exist, it is created and the application's store added to it.
+ */
+- (NSPersistentStoreCoordinator *)persistentStoreCoordinator
+{
+  if (__persistentStoreCoordinator != nil)
+  {
+    return __persistentStoreCoordinator;
+  }
+  
+  NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"OTPAccounts.sqlite"];
+  
+  /* Add the check for an existing store here... */
+  if ([[NSFileManager defaultManager] fileExistsAtPath:storeURL.path] == NO) {
+    self.downloadStoreAfterRegistering = YES;
+  }
+  
+  NSError *error = nil;
+  __persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
+  if (![__persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error])
+  {
+    /*
+     Replace this implementation with code to handle the error appropriately.
+     
+     abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
+     
+     Typical reasons for an error here include:
+     * The persistent store is not accessible;
+     * The schema for the persistent store is incompatible with current managed object model.
+     Check the error message to determine what the actual problem was.
+     
+     
+     If the persistent store is not accessible, there is typically something wrong with the file path. Often, a file URL is pointing into the application's resources directory instead of a writeable directory.
+     
+     If you encounter schema incompatibility errors during development, you can reduce their frequency by:
+     * Simply deleting the existing store:
+     [[NSFileManager defaultManager] removeItemAtURL:storeURL error:nil]
+     
+     * Performing automatic lightweight migration by passing the following dictionary as the options parameter:
+     [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
+     
+     Lightweight migration will only work for a limited set of schema changes; consult "Core Data Model Versioning and Data Migration Programming Guide" for details.
+     
+     */
+    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+    abort();
+  }
+  
+  return __persistentStoreCoordinator;
+}
+
+#pragma mark - Application's Documents directory
+
+/**
+ Returns the URL to the application's Documents directory.
+ */
+- (NSURL *)applicationDocumentsDirectory
+{
+  return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+}
+
+
 
 @end
 

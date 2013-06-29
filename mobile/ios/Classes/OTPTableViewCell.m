@@ -25,9 +25,9 @@
 #import "GTMSystemVersion.h"
 
 @interface OTPTableViewCell ()
-@property (readwrite, retain, nonatomic) OTPAuthURL *authURL;
 @property (readwrite, assign, nonatomic) BOOL showingInfo;
 @property (readonly, nonatomic) BOOL shouldHideInfoButton;
+@property (retain, nonatomic, readwrite) OTPAuthURL *authURL;
 
 - (void)updateUIForAuthURL:(OTPAuthURL *)authURL;
 @end

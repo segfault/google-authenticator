@@ -18,6 +18,8 @@
 
 #import "RootViewController.h"
 #import "OTPAuthURLEntryController.h"
+#import <CoreData/CoreData.h> 
+#import <TICoreDataSync.h>
 
 typedef enum {
   kOTPNotEditing,
@@ -28,10 +30,9 @@ typedef enum {
 @interface OTPAuthAppDelegate : NSObject
     <UIApplicationDelegate,
     OTPAuthURLEntryControllerDelegate,
-    UITableViewDataSource,
-    UITableViewDelegate,
     UIActionSheetDelegate,
-    UIAlertViewDelegate>
+    UIAlertViewDelegate,
+    NSFetchedResultsControllerDelegate>
 @property(nonatomic, retain) IBOutlet UINavigationController *navigationController;
 @property(nonatomic, retain) IBOutlet UIWindow *window;
 @property(nonatomic, retain) IBOutlet UINavigationController *authURLEntryController;
@@ -39,9 +40,16 @@ typedef enum {
 @property(nonatomic, retain) IBOutlet UIBarButtonItem *settingsButton;
 @property(nonatomic, retain) IBOutlet UINavigationItem *navigationItem;
 @property(nonatomic, retain) IBOutlet UINavigationItem *authURLEntryNavigationItem;
+@property(nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
+@property(nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
+@property(nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property(retain) TICDSDocumentSyncManager *documentSyncManager;
+@property(nonatomic, assign, getter = shouldDownloadStoreAfterRegistering) BOOL downloadStoreAfterRegistering;
+@property(nonatomic, retain) NSFetchedResultsController *fetchedResultsController;     
 
 - (IBAction)addAuthURL:(id)sender;
 - (IBAction)showLegalInformation:(id)sender;
 - (IBAction)showSettings:(id)sender;
+- (IBAction)beginSync:(id)sender;
 
 @end
